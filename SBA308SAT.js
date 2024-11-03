@@ -23,11 +23,26 @@ const LearnerSubmissions = [
     { learner_id: 132, assignment_id: 2, submission: { submitted_at: "2023-03-07", score: 140 }} // late submission
   ];
 
-  // Function to retrieve and calculate learner data
-function getLearnerData(course, ag, submissions) {
-    // Validate course_id
-    if (ag.course_id !== course.id) {
-        throw new Error("Invalid AssignmentGroup: course_id does not match CourseInfo");
+  function getLearnerData(course, assignmentGroup, submissions) {
+    // Step 1: Ensure the assignment group belongs to the right course
+    if (assignmentGroup.course_id !== course.id) {
+      throw new Error("Assignment group does not belong to the specified course.");
     }
-
-    const results = []; // Array to hold the result objects
+    
+    const results = [];
+    const assignmentById = {};
+  
+    // Map each assignment by its ID for easier look-up
+    assignmentGroup.assignments.forEach((assignment) => {
+      assignmentById[assignment.id] = assignment;
+    });
+  
+    // Group submissions by learner
+    const learnerData = {};
+  
+    submissions.forEach((submission) => {
+      const learnerId = submission.learner_id;
+      const assignmentId = submission.assignment_id;
+      const assignment = 
+      const submittedAt = 
+      const dueAt = 
